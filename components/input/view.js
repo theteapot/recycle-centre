@@ -11,8 +11,9 @@ export default function() {
       value={this.props.value}
       style={{
         fontStyle: "italic",
-        width: 200,
+        width: 250,
         marginTop: 10,
+        fontSize: 18,
         borderRadius: 5,
         textAlign: "center",
         borderBottomWidth: 1,

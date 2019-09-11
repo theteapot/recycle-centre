@@ -12,19 +12,6 @@ export default class Button extends Component {
   }
 
   _pressButton(index) {
-    // Marks a button as pressed, optionally unmarks others
-    // this.setState({
-    //   buttons: this.state.buttons.map((value, i) => {
-    //     if (i === index) {
-    //       return { ...value, pressed: true };
-    //     } else if (!this.props.multiSelect) {
-    //       return { ...value, pressed: false };
-    //     }
-    //   })
-    // });
-    // this.props.onChange(
-    //   this.state.buttons.filter(({ pressed }) => pressed === true)
-    // );
     this.props.onChange(index);
   }
 

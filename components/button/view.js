@@ -1,18 +1,16 @@
 import { ScrollView, View, Text } from "react-native";
 import React from "react";
-import { TouchableHighlight } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { colors } from "../../styles";
 
 function renderButtons(buttons, direction, onPress, style) {
   return buttons.map(({ label, value, pressed }, index) => (
-    <TouchableHighlight
-      onPress={() => {}}
-      underlayColor={colors.primaryLight}
+    <TouchableOpacity
+      activeOpacity={0.5}
       style={{
         ...style,
         flexGrow: direction === "horizontal" ? 1 : 0,
-        width: direction === "vertical" ? 200 : "auto",
-        height: 40,
+        height: 50,
         justifyContent: "center",
         borderTopLeftRadius: index === 0 ? 5 : 0,
         borderBottomLeftRadius:
@@ -33,20 +31,21 @@ function renderButtons(buttons, direction, onPress, style) {
           index !== buttons.length - 1 && direction === "vertical" ? 1 : 0,
         borderColor: colors.primaryDark,
 
-        backgroundColor: pressed ? colors.primaryDark : colors.primary
+        backgroundColor: pressed ? colors.primaryDark : colors.primaryLight
       }}
       onPressOut={() => onPress(index)}
     >
       <Text
         style={{
           fontWeight: "bold",
+          fontSize: 18,
           color: pressed ? colors.secondaryText : colors.primaryText,
           textAlign: "center"
         }}
       >
         {label}
       </Text>
-    </TouchableHighlight>
+    </TouchableOpacity>
   ));
 }
 
@@ -55,6 +54,7 @@ export default function() {
     <View
       style={{
         padding: 10,
+        width: "100%",
         flexDirection: this.props.direction === "horizontal" ? "row" : "column"
       }}
     >

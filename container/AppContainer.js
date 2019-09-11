@@ -12,8 +12,8 @@ export default class AppContainer extends Component {
     super(props);
 
     this.paymentTypeButtons = [
-      { label: "CASH", value: "cash", pressed: true }
-      //   { label: "EFTPOS", value: "EFTPOS", pressed: false }
+      { label: "CASH", value: "cash", pressed: true },
+      { label: "EFTPOS", value: "EFTPOS", pressed: false }
     ];
 
     this.productTypeButtons = [
@@ -39,7 +39,16 @@ export default class AppContainer extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
+      <KeyboardAvoidingView
+        behavior="height"
+        enabled
+        style={{
+          justifyContent: "flex-end",
+          alignItems: "center",
+          flex: 1,
+          paddingTop: 20
+        }}
+      >
         {this.state.loading && <FullscreenLoader />}
         <Button
           style={{ zIndex: 1 }}
@@ -106,6 +115,7 @@ export default class AppContainer extends Component {
         >
           {this.state.statusText}
         </Text>
+        <View style={{ flex: 1 }} />
       </KeyboardAvoidingView>
     );
   }
@@ -116,6 +126,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "flex-end"
   }
 });
