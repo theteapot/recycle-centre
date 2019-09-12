@@ -12,8 +12,8 @@ export default class AppContainer extends Component {
     super(props);
 
     this.paymentTypeButtons = [
-      { label: "CASH", value: "cash", pressed: true },
-      { label: "EFTPOS", value: "EFTPOS", pressed: false }
+      { label: "CASH", value: "cash", pressed: true }
+      //   { label: "EFTPOS", value: "EFTPOS", pressed: false }
     ];
 
     this.productTypeButtons = [
