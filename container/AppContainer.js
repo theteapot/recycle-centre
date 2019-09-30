@@ -94,24 +94,44 @@ export default class AppContainer extends Component {
           onSubmit={async value => {
             const { paymentAmount, paymentType, productType } = this.state;
             this.setState({ paymentAmount: value, loading: true });
-            await fetch(`${SERVER}/payments`, {
-              method: "POST",
-              headers: { "content-type": "application/json" },
-              body: JSON.stringify({ paymentType, paymentAmount, productType })
-            });
-            this.setState({
-              loading: false,
-              statusText: "Upload successful",
-              paymentAmount: "",
-              paymentType: "",
-              productType: "",
-              productTypeButtons: this.productTypeButtons,
-              paymentTypeButtons: this.paymentTypeButtons
-            });
+
+            try {
+              await fetch(`${SERVER}/payments`, {
+                method: "POST",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify({
+                  paymentType,
+                  paymentAmount,
+                  productType
+                })
+              });
+              this.setState({
+                loading: false,
+                errorUploading: false,
+                statusText: "Upload successful",
+                paymentAmount: "",
+                // paymentType: "",
+                // productType: "",
+                productTypeButtons: this.productTypeButtons,
+                paymentTypeButtons: this.paymentTypeButtons
+              });
+            } catch (error) {
+              this.setState({
+                loading: false,
+                errorUploading: true,
+                statusText: "Upload unsuccessful"
+              });
+            }
           }}
         />
         <Text
-          style={{ paddingTop: 10, fontStyle: "italic", color: colors.primary }}
+          style={{
+            paddingTop: 10,
+            fontStyle: "italic",
+            color: this.state.errorUploading
+              ? colors.primaryError
+              : colors.primary
+          }}
         >
           {this.state.statusText}
         </Text>
