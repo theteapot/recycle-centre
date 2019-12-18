@@ -3,10 +3,11 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import { colors } from "../../styles";
 
-function renderButtons(buttons, direction, onPress, style) {
+function renderButtons(buttons, direction, onPress, style, buttonIsSelected) {
   return buttons.map(({ label, value, pressed }, index) => (
-    <TouchableOpacity
+    ((buttonIsSelected && pressed) || !buttonIsSelected) && <TouchableOpacity
       activeOpacity={0.5}
+      key={index}
       style={{
         ...style,
         flexGrow: direction === "horizontal" ? 1 : 0,
@@ -15,12 +16,12 @@ function renderButtons(buttons, direction, onPress, style) {
         borderTopLeftRadius: index === 0 ? 5 : 0,
         borderBottomLeftRadius:
           (direction === "horizontal" && index === 0) ||
-          (direction === "vertical" && index === buttons.length - 1)
+            (direction === "vertical" && index === buttons.length - 1)
             ? 5
             : 0,
         borderTopRightRadius:
           (direction === "horizontal" && index === buttons.length - 1) ||
-          (direction === "vertical" && index === 0)
+            (direction === "vertical" && index === 0)
             ? 5
             : 0,
         borderBottomRightRadius: index === buttons.length - 1 ? 5 : 0,
@@ -46,10 +47,10 @@ function renderButtons(buttons, direction, onPress, style) {
         {label}
       </Text>
     </TouchableOpacity>
-  ));
+  ))
 }
 
-export default function() {
+export default function () {
   return (
     <View
       style={{
@@ -62,7 +63,8 @@ export default function() {
         this.props.buttons,
         this.props.direction,
         this._pressButton,
-        this.props.style
+        this.props.style,
+        this.state.buttonIsSelected
       )}
     </View>
   );
