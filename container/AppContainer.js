@@ -91,7 +91,7 @@ export default class AppContainer extends Component {
               );
               this.setState({
                 productTypeButtons: newProductTypeButtons,
-                paymentType: this.state.productTypeButtons[index].value
+                productType: this.state.productTypeButtons[index].value
               });
             }}
           />
