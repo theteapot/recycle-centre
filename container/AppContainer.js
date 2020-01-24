@@ -102,38 +102,40 @@ export default class AppContainer extends Component {
             onChangeText={value => this.setState({ paymentAmount: value })}
             placeholder="Enter amount *"
             onSubmit={async value => {
-              const { paymentAmount, paymentType, productType, comment } = this.state;
               this.setState({ paymentAmount: value, loading: true });
 
-              try {
-                await fetch(`${SERVER}/payments`, {
-                  method: "POST",
-                  headers: { "content-type": "application/json" },
-                  body: JSON.stringify({
-                    paymentType,
-                    paymentAmount,
-                    productType,
-                    comment
-                  })
-                });
-                this.setState({
-                  loading: false,
-                  errorUploading: false,
-                  statusText: "Upload successful",
-                  paymentAmount: "",
-                  comment: "",
-                  // paymentType: "",
-                  // productType: "",
-                  productTypeButtons: this.productTypeButtons,
-                  paymentTypeButtons: this.paymentTypeButtons
-                });
-              } catch (error) {
-                this.setState({
-                  loading: false,
-                  errorUploading: true,
-                  statusText: "Upload unsuccessful"
-                });
-              }
+              const { paymentAmount, paymentType, productType, comment } = this.state;
+
+              // try {
+              await fetch(`${SERVER}/payments`, {
+                method: "POST",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify({
+                  paymentType,
+                  paymentAmount,
+                  productType,
+                  comment
+                })
+              });
+              this.setState({
+                loading: false,
+                errorUploading: false,
+                statusText: "Upload successful",
+                paymentAmount: "",
+                comment: "",
+                // paymentType: "",
+                // productType: "",
+                productTypeButtons: this.productTypeButtons,
+                paymentTypeButtons: this.paymentTypeButtons
+              });
+              // } catch (error) {
+              //   this.setState({
+              //     loading: false,
+              //     errorUploading: true,
+              //     statusText: `Upload unsuccessful ${JSON.stringify(error)}`
+              //   });
+              // }
+              // }
             }}
           />
           <Text
