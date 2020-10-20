@@ -3,7 +3,6 @@
     "name": "Whanga Recycle Centre",
     "slug": "recycle-centre",
     "privacy": "public",
-    "sdkVersion": "37.0.0",
     "platforms": [
       "ios",
       "android",
