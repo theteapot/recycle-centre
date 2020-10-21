@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, KeyboardAvoidingView, ScrollView } from "react-native";
-import Button from "../components/button";
+import Button from "../components/buttons";
 import Input from "../components/input";
 import TextInput from '../components/text-input'
 import AsyncButton from "../components/async-button";

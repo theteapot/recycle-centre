@@ -2,7 +2,7 @@ import { TextInput, KeyboardAvoidingView } from "react-native";
 import React from "react";
 import { colors } from "../../styles";
 
-export default function() {
+export default function () {
   return (
     <TextInput
       placeholder={this.props.placeholder}
@@ -17,11 +17,12 @@ export default function() {
         borderRadius: 5,
         textAlign: "center",
         borderBottomWidth: 1,
-        borderBottomColor: colors.primaryDark
+        borderBottomColor: colors.primaryDark,
+        ...this.props.style,
       }}
       onSubmitEditing={() => this.props.onSubmit(this.props.value)}
       returnKeyType="done"
-      onChangeText={value => this.props.onChangeText(value)}
+      onChangeText={(value) => this.props.onChangeText(value)}
     />
   );
 }
