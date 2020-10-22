@@ -1,0 +1,23 @@
+{
+  "name": "recycle-centre-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker-build": "docker build ./ -t theteapot/recycle-centre-server:latest --no-cache",
+    "docker-push": "docker push theteapot/recycle-centre-server:latest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "csv-stringify": "^5.3.3",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.26",
+    "mongodb": "^3.3.2"
+  }
+}
