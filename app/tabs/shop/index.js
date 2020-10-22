@@ -6,6 +6,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Picker,
+  Modal,
 } from "react-native";
 import Buttons from "../../components/buttons";
 import Button from "../../components/button";
@@ -18,6 +19,8 @@ import { colors } from "../../styles";
 import Order from "./order";
 import { DialogComponent, DialogContent } from "react-native-dialog-component";
 import Header from "../../components/header";
+import ModalPicker from "react-native-modal-selector";
+import style from "react-native-modal-selector/style";
 
 export default class Recycle extends Component {
   constructor(props) {
@@ -28,33 +31,38 @@ export default class Recycle extends Component {
       { label: "EFTPOS", value: "EFTPOS", pressed: false },
     ];
 
+    let index = 0;
     this.productTypes = [
       {
+        key: index++,
         label: "Select a product",
         value: "",
       },
-      { label: "Biochar (bucket)", value: "BIOCHAR_BKT" },
+      { key: index++, label: "Biochar (bucket)", value: "BIOCHAR_BKT" },
       {
+        key: index++,
         label: "Biochar (1L volume)",
         value: "BIOCHAR_VOL",
       },
-      { label: "Community Crafts", value: "COMM_CRAFT" },
-      { label: "Tag 'N Test", value: "TAG_TEST" },
-      { label: "Mulch bucket swap", value: "MLCH_BKT_SWP" },
-      { label: "Battery Buckets", value: "BATT_BKT" },
-      { label: "Battery Weight", value: "BATT_WGT" },
-      { label: "Plant Sales", value: "PLANT_SALE" },
-      { label: "Refillery", value: "REFILL" },
-      { label: "Toki Straws", value: "TOKI_STRAWS" },
+      { key: index++, label: "Community Crafts", value: "COMM_CRAFT" },
+      { key: index++, label: "Tag 'N Test", value: "TAG_TEST" },
+      { key: index++, label: "Mulch bucket swap", value: "MLCH_BKT_SWP" },
+      { key: index++, label: "Battery Buckets", value: "BATT_BKT" },
+      { key: index++, label: "Battery Weight", value: "BATT_WGT" },
+      { key: index++, label: "Plant Sales", value: "PLANT_SALE" },
+      { key: index++, label: "Refillery", value: "REFILL" },
+      { key: index++, label: "Toki Straws", value: "TOKI_STRAWS" },
       {
+        key: index++,
         label: "Reusable bags or picnic kits",
         value: "REUSE_BAG_PICNIC",
       },
       {
+        key: index++,
         label: "Coastal Cabin Products",
         value: "COASTAL_CABIN",
       },
-      { label: "Items for sale", value: "ITEMS_FOR_SALE" },
+      { key: index++, label: "Items for sale", value: "ITEMS_FOR_SALE" },
     ];
 
     this.state = {
@@ -68,6 +76,7 @@ export default class Recycle extends Component {
     };
 
     this.addToOrder = this.addToOrder.bind(this);
+    this.submitOrder = this.submitOrder.bind(this);
     this.removeFromOrder = this.removeFromOrder.bind(this);
     this.setSelectedValue = this.setSelectedValue.bind(this);
     this.setPaymentAmount = this.setPaymentAmount.bind(this);
@@ -76,30 +85,35 @@ export default class Recycle extends Component {
 
   setSelectedValue(value) {
     console.log(value);
-    this.setState({ selectedProduct: value });
+    this.setState({ selectedProduct: value.value });
   }
 
-  async submitOrder(order) {
-    await fetch(`${SERVER}/payments`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        paymentType,
-        paymentAmount,
-        productType,
-        comment,
-      }),
-    });
-    this.setState({
-      loading: false,
-      errorUploading: false,
-      statusText: "Upload successful",
-      paymentAmount: "",
-      comment: "",
+  async submitOrder() {
+    let { order } = this.state;
+    console.log(`${SERVER}/payments/shop`);
+    console.log(order);
+    try {
+      let response = await fetch(`${SERVER}/payments/shop`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          order,
+        }),
+      });
+      console.log(response);
 
-      productTypeButtons: this.productTypeButtons,
-      paymentTypeButtons: this.paymentTypeButtons,
-    });
+      this.setState({
+        loading: false,
+        errorUploading: false,
+        statusText: "Upload successful",
+        paymentAmount: "",
+        selectedProduct: "",
+        productQuantity: 1,
+        order: [],
+      });
+    } catch (error) {
+      this.setState({ errorUploading: true });
+    }
   }
 
   setPaymentAmount(value) {
@@ -171,70 +185,33 @@ export default class Recycle extends Component {
                 width: "76%",
               }}
             >
-              <Picker
-                selectedValue={this.state.selectedProduct}
-                style={{
-                  height: 50,
-                  width: "100%",
+              <ModalPicker
+                optionStyle={{
+                  backgroundColor: colors.primary,
                 }}
-                onValueChange={(value, itemIndex) =>
-                  this.setSelectedValue(value)
-                }
-              >
-                {this.productTypes.map(({ label, value }) => (
-                  <Picker.Item label={label} value={value} />
-                ))}
-              </Picker>
-            </View>
-          </View>
-
-          {/* Price input */}
-          <View
-            style={{
-              width: "80%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              flexDirection: "row",
-              paddingTop: 10,
-            }}
-          >
-            <Text
-              style={{
-                fontWeight: "bold",
-                color: colors.secondary,
-              }}
-            >
-              PRICE:
-            </Text>
-            <View
-              style={{
-                width: "76%",
-                borderBottomWidth: 1,
-              }}
-            >
-              <Input
-                style={{
-                  fontStyle: "normal",
-                  width: "76%",
-                  fontSize: 16,
-                  textAlign: "left",
-                  borderBottomWidth: 0,
-                  marginTop: 0,
-                  paddingLeft: 7,
+                optionTextStyle={{
+                  color: "white",
+                  textTransform: "uppercase",
                 }}
-                width="78%"
-                keyboardType="decimal-pad"
-                value={this.state.paymentAmount}
-                onChangeText={(value) =>
-                  this.setState({ paymentAmount: value })
-                }
-                placeholder="Enter amount ($) *"
-                onSubmit={(value) => this.addToOrder()}
+                sectionStyle={{
+                  backgroundColor: colors.primary,
+                }}
+                cancelStyle={{
+                  backgroundColor: colors.primary,
+                  borderRadius: 5,
+                }}
+                cancelTextStyle={{
+                  textTransform: "uppercase",
+                  color: "white",
+                }}
+                selectStyle={{ borderWidth: 0 }}
+                style={{ borderWidth: 0 }}
+                data={this.productTypes}
+                initValue="Select a product type"
+                onChange={(value) => this.setSelectedValue(value)}
               />
             </View>
           </View>
-
           {/* Quantity Picker */}
           <View
             style={{
@@ -283,6 +260,55 @@ export default class Recycle extends Component {
             </View>
           </View>
 
+          {/* Price input */}
+          <View
+            style={{
+              width: "80%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              flexDirection: "row",
+              paddingTop: 10,
+            }}
+          >
+            <Text
+              style={{
+                fontWeight: "bold",
+                color: colors.secondary,
+              }}
+            >
+              PRICE:
+            </Text>
+            <View
+              style={{
+                width: "76%",
+                borderBottomWidth: 1,
+              }}
+            >
+              <Input
+                style={{
+                  fontStyle: "normal",
+                  width: "76%",
+                  fontSize: 16,
+                  textAlign: "left",
+                  borderBottomWidth: 0,
+                  marginTop: 0,
+                  paddingLeft: 7,
+                }}
+                width="78%"
+                keyboardType="decimal-pad"
+                value={this.state.paymentAmount}
+                onChangeText={(value) =>
+                  this.setState({ paymentAmount: value })
+                }
+                placeholder="Enter amount ($) *"
+                onSubmit={(value) =>
+                  this.setState({ paymentAmount: this.state.paymentAmount })
+                }
+              />
+            </View>
+          </View>
+
           {/* Add item to order */}
           <AsyncButton
             buttonStyle={{
@@ -304,6 +330,18 @@ export default class Recycle extends Component {
             onPress={() => this.addToOrder()}
           />
 
+          {/* Order table */}
+          <Order
+            order={this.state.order}
+            showDialog={this.showDialog}
+            removeFromOrder={this.removeFromOrder}
+          />
+
+          <AsyncButton
+            disabled={this.state.order.length === 0}
+            label="SUBMIT"
+            onPress={this.submitOrder}
+          ></AsyncButton>
           {/* Text for error reporting */}
           <Text
             style={{
@@ -316,18 +354,6 @@ export default class Recycle extends Component {
           >
             {this.state.statusText}
           </Text>
-
-          {/* Order table */}
-          <Order
-            order={this.state.order}
-            showDialog={this.showDialog}
-            removeFromOrder={this.removeFromOrder}
-          />
-
-          <AsyncButton
-            disabled={this.state.order.length === 0}
-            label="SUBMIT"
-          ></AsyncButton>
           <View style={{ flex: 1 }} />
         </KeyboardAvoidingView>
       </ScrollView>
