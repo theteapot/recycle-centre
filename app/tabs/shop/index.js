@@ -29,25 +29,38 @@ export default class Recycle extends Component {
     ];
 
     this.productTypes = [
-      { label: "Select a product", value: "" },
+      {
+        label: "Select a product",
+        value: "",
+      },
       { label: "Biochar (bucket)", value: "BIOCHAR_BKT" },
-      { label: "Biochar (1L volume)", value: "BIOCHAR_VOL" },
+      {
+        label: "Biochar (1L volume)",
+        value: "BIOCHAR_VOL",
+      },
       { label: "Community Crafts", value: "COMM_CRAFT" },
       { label: "Tag 'N Test", value: "TAG_TEST" },
       { label: "Mulch bucket swap", value: "MLCH_BKT_SWP" },
       { label: "Battery Buckets", value: "BATT_BKT" },
+      { label: "Battery Weight", value: "BATT_WGT" },
       { label: "Plant Sales", value: "PLANT_SALE" },
       { label: "Refillery", value: "REFILL" },
       { label: "Toki Straws", value: "TOKI_STRAWS" },
-      { label: "Reusable bags or picnic kits", value: "REUSE_BAG_PICNIC" },
-      { label: "Coastal Cabin Products", value: "COASTAL_CABIN" },
+      {
+        label: "Reusable bags or picnic kits",
+        value: "REUSE_BAG_PICNIC",
+      },
+      {
+        label: "Coastal Cabin Products",
+        value: "COASTAL_CABIN",
+      },
       { label: "Items for sale", value: "ITEMS_FOR_SALE" },
     ];
 
     this.state = {
       paymentType: "cash",
       selectedProduct: "",
-      productQuantity: 0,
+      productQuantity: 1,
       paymentAmount: "",
       loading: false,
       statusText: "",
@@ -96,14 +109,18 @@ export default class Recycle extends Component {
   addToOrder() {
     // Get the values of the current item from state
     // Then set the payment amount back to 0
-    const { selectedProduct, paymentAmount } = this.state;
+    const { selectedProduct, paymentAmount, productQuantity } = this.state;
     const product = this.productTypes.find(
       ({ value }) => value === selectedProduct
     );
     this.setState({
-      order: [...this.state.order, { ...product, paymentAmount }],
+      order: [
+        ...this.state.order,
+        { ...product, paymentAmount, productQuantity },
+      ],
       selectedProduct: "",
       paymentAmount: "",
+      productQuantity: 1,
     });
   }
 
@@ -215,6 +232,54 @@ export default class Recycle extends Component {
                 placeholder="Enter amount ($) *"
                 onSubmit={(value) => this.addToOrder()}
               />
+            </View>
+          </View>
+
+          {/* Quantity Picker */}
+          <View
+            style={{
+              width: "80%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              flexDirection: "row",
+              paddingTop: 10,
+            }}
+          >
+            <Text
+              style={{
+                fontWeight: "bold",
+                color: colors.secondary,
+              }}
+            >
+              QTY:
+            </Text>
+            <View
+              style={{
+                width: "76%",
+                borderBottomWidth: 1,
+              }}
+            >
+              <Input
+                style={{
+                  fontStyle: "normal",
+                  width: "76%",
+                  fontSize: 16,
+                  textAlign: "left",
+                  borderBottomWidth: 0,
+                  marginTop: 0,
+                  paddingLeft: 7,
+                }}
+                keyboardType="decimal-pad"
+                placeholder="Default (1)"
+                value={this.state.productQuantity}
+                onChangeText={(value) =>
+                  this.setState({ productQuantity: value })
+                }
+                onSubmit={(value) =>
+                  this.setState({ productQuantity: this.state.productQuantity })
+                }
+              ></Input>
             </View>
           </View>
 

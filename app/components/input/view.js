@@ -5,7 +5,7 @@ import { colors } from "../../styles";
 export default function () {
   return (
     <TextInput
-      placeholder={this.props.placeholder}
+      placeholder={this.state.placeholder}
       placeholderTextColor={colors.primaryText}
       keyboardType={this.props.keyboardType}
       value={this.props.value}
