@@ -11,9 +11,9 @@ RUN node --version
 RUN npm --version
 RUN mongo --version
 
-RUN git clone https://github.com/theteapot/recycle-centre-server.git
+RUN git clone https://github.com/theteapot/recycle-centre.git
 
-WORKDIR /recycle-centre-server
+WORKDIR /recycle-centre/server
 VOLUME /data/db
 RUN npm install
 EXPOSE 5142
