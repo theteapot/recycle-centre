@@ -13,7 +13,7 @@ export default class Order extends Component {
     this.renderOrderLine = this.renderOrderLine.bind(this);
   }
 
-  renderOrderLine({ value, label, paymentAmount }, index) {
+  renderOrderLine({ value, label, paymentAmount, productQuantity }, index) {
     return (
       <TouchableHighlight
         style={{
@@ -36,6 +36,7 @@ export default class Order extends Component {
           }}
         >
           <Text>{label}</Text>
+          <Text>{productQuantity}</Text>
           <Text>${(+paymentAmount).toFixed(2)}</Text>
         </View>
       </TouchableHighlight>
@@ -75,7 +76,11 @@ export default class Order extends Component {
         >
           Total:{" $"}
           {this.props.order
-            .reduce((prev, curr) => (prev += +curr.paymentAmount), 0)
+            .reduce(
+              (prev, curr) =>
+                (prev += +curr.paymentAmount * +curr.productQuantity),
+              0
+            )
             .toFixed(2)}
         </Text>
       </View>
