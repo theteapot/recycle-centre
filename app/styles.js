@@ -7,5 +7,7 @@ export const colors = {
   secondaryDark: "#003300",
   primaryText: "#000000",
   secondaryText: "#ffffff",
-  primaryError: "#ff0000"
+  primaryError: "#ff0000",
+  disabled: "#808080",
+  background: "#ffffff",
 };
