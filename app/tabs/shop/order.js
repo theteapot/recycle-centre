@@ -16,6 +16,7 @@ export default class Order extends Component {
   renderOrderLine({ value, label, paymentAmount, productQuantity }, index) {
     return (
       <TouchableHighlight
+        index={index}
         style={{
           borderBottomWidth: 1,
           paddingTop: 10,
@@ -45,7 +46,7 @@ export default class Order extends Component {
 
   render() {
     return (
-      <View style={{ width: "85%" }}>
+      <View style={{ width: "85%", paddingTop: 20 }}>
         <View
           style={{
             borderBottomWidth: 1,

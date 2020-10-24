@@ -33,36 +33,85 @@ export default class Recycle extends Component {
 
     let index = 0;
     this.productTypes = [
+      // {
+      //   key: index++,
+      //   label: "Select a product",
+      //   value: "",
+      //   defaultPrice: "",
+      // },
       {
         key: index++,
-        label: "Select a product",
-        value: "",
+        label: "Biochar (bucket)",
+        value: "BIOCHAR_BKT",
+        defaultPrice: "",
       },
-      { key: index++, label: "Biochar (bucket)", value: "BIOCHAR_BKT" },
       {
         key: index++,
         label: "Biochar (1L volume)",
         value: "BIOCHAR_VOL",
+        defaultPrice: "",
       },
-      { key: index++, label: "Community Crafts", value: "COMM_CRAFT" },
-      { key: index++, label: "Tag 'N Test", value: "TAG_TEST" },
-      { key: index++, label: "Mulch bucket swap", value: "MLCH_BKT_SWP" },
-      { key: index++, label: "Battery Buckets", value: "BATT_BKT" },
-      { key: index++, label: "Battery Weight", value: "BATT_WGT" },
-      { key: index++, label: "Plant Sales", value: "PLANT_SALE" },
-      { key: index++, label: "Refillery", value: "REFILL" },
-      { key: index++, label: "Toki Straws", value: "TOKI_STRAWS" },
+      {
+        key: index++,
+        label: "Community Crafts",
+        value: "COMM_CRAFT",
+        defaultPrice: "",
+      },
+      {
+        key: index++,
+        label: "Tag 'N Test",
+        value: "TAG_TEST",
+        defaultPrice: "",
+      },
+      {
+        key: index++,
+        label: "Mulch bucket swap",
+        value: "MLCH_BKT_SWP",
+        defaultPrice: "3",
+      },
+      {
+        key: index++,
+        label: "Battery Buckets",
+        value: "BATT_BKT",
+        defaultPrice: "13",
+      },
+      {
+        key: index++,
+        label: "Battery Weight",
+        value: "BATT_WGT",
+        defaultPrice: "",
+      },
+      {
+        key: index++,
+        label: "Plant Sales",
+        value: "PLANT_SALE",
+        defaultPrice: "",
+      },
+      { key: index++, label: "Refillery", value: "REFILL", defaultPrice: "" },
+      {
+        key: index++,
+        label: "Toki Straws",
+        value: "TOKI_STRAWS",
+        defaultPrice: "",
+      },
       {
         key: index++,
         label: "Reusable bags or picnic kits",
         value: "REUSE_BAG_PICNIC",
+        defaultPrice: "",
       },
       {
         key: index++,
         label: "Coastal Cabin Products",
         value: "COASTAL_CABIN",
+        defaultPrice: "",
       },
-      { key: index++, label: "Items for sale", value: "ITEMS_FOR_SALE" },
+      {
+        key: index++,
+        label: "Items for sale",
+        value: "ITEMS_FOR_SALE",
+        defaultPrice: "",
+      },
     ];
 
     this.state = {
@@ -79,19 +128,20 @@ export default class Recycle extends Component {
     this.submitOrder = this.submitOrder.bind(this);
     this.removeFromOrder = this.removeFromOrder.bind(this);
     this.setSelectedValue = this.setSelectedValue.bind(this);
-    this.setPaymentAmount = this.setPaymentAmount.bind(this);
     this.showDialog = this.showDialog.bind(this);
   }
 
   setSelectedValue(value) {
-    console.log(value);
-    this.setState({ selectedProduct: value.value });
+    this.setState({
+      selectedProduct: value.value,
+      selectedKey: value.key,
+      paymentAmount: value.defaultPrice,
+    });
   }
 
   async submitOrder() {
     let { order } = this.state;
-    console.log(`${SERVER}/payments/shop`);
-    console.log(order);
+
     try {
       let response = await fetch(`${SERVER}/payments/shop`, {
         method: "POST",
@@ -100,7 +150,6 @@ export default class Recycle extends Component {
           order,
         }),
       });
-      console.log(response);
 
       this.setState({
         loading: false,
@@ -116,10 +165,6 @@ export default class Recycle extends Component {
     }
   }
 
-  setPaymentAmount(value) {
-    console.log(value);
-  }
-
   addToOrder() {
     // Get the values of the current item from state
     // Then set the payment amount back to 0
@@ -133,6 +178,7 @@ export default class Recycle extends Component {
         { ...product, paymentAmount, productQuantity },
       ],
       selectedProduct: "",
+      selectedKey: "",
       paymentAmount: "",
       productQuantity: 1,
     });
@@ -205,6 +251,7 @@ export default class Recycle extends Component {
                   color: "white",
                 }}
                 selectStyle={{ borderWidth: 0 }}
+                selectedKey={this.state.selectedKey}
                 style={{ borderWidth: 0 }}
                 data={this.productTypes}
                 initValue="Select a product type"
@@ -301,7 +348,7 @@ export default class Recycle extends Component {
                 onChangeText={(value) =>
                   this.setState({ paymentAmount: value })
                 }
-                placeholder="Enter amount ($) *"
+                placeholder="Enter price per unit ($) *"
                 onSubmit={(value) =>
                   this.setState({ paymentAmount: this.state.paymentAmount })
                 }
