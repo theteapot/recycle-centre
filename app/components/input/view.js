@@ -1,28 +1,29 @@
-import { TextInput, KeyboardAvoidingView } from "react-native";
+import { TextInput, KeyboardAvoidingView, View, Text } from "react-native";
 import React from "react";
 import { colors } from "../../styles";
+import InputParent from "../input-parent";
 
 export default function () {
   return (
-    <TextInput
-      placeholder={this.state.placeholder}
-      placeholderTextColor={colors.primaryText}
-      keyboardType={this.props.keyboardType}
-      value={this.props.value}
-      style={{
-        fontStyle: "italic",
-        width: 250,
-        marginTop: 10,
-        fontSize: 18,
-        borderRadius: 5,
-        textAlign: "center",
-        borderBottomWidth: 1,
-        borderBottomColor: colors.primaryDark,
-        ...this.props.style,
-      }}
-      onSubmitEditing={() => this.props.onSubmit(this.props.value)}
-      returnKeyType="done"
-      onChangeText={(value) => this.props.onChangeText(value)}
-    />
+    <InputParent label={this.props.label}>
+      <TextInput
+        placeholder={this.state.placeholder}
+        placeholderTextColor={colors.disabled}
+        keyboardType={this.props.keyboardType}
+        value={this.props.value}
+        style={{
+          color: colors.disabled,
+          width: 250,
+          flexGrow: 2,
+          fontSize: 18,
+          borderRadius: 5,
+          textAlign: "center",
+          ...this.props.style,
+        }}
+        onSubmitEditing={this.props.onSubmitEditing}
+        returnKeyType="Done"
+        onChangeText={this.props.onChangeText}
+      />
+    </InputParent>
   );
 }

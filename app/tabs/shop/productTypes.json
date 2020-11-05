@@ -1,0 +1,141 @@
+{
+  "productTypes": [
+    {
+      "label": "Biochar (bucket)",
+      "value": "BIOCHAR_BKT",
+      "defaultPrice": "",
+      "subMenu": { "items": [] }
+    },
+    {
+      "label": "Biochar (1L volume)",
+      "value": "BIOCHAR_VOL",
+      "defaultPrice": "",
+      "subMenu": { "items": [] }
+    },
+    {
+      "label": "Community Crafts",
+      "value": "COMM_CRAFT",
+      "defaultPrice": "",
+      "subMenu": {
+        "items": [
+          {
+            "label": "Toki Straws",
+            "value": "TOKI_STRAW",
+            "defaultPrice": ""
+          },
+          {
+            "label": "Waitotara Plants",
+            "value": "WTOTRA_PLNT",
+            "defaultPrice": ""
+          },
+          {
+            "label": "Picnic kits",
+            "value": "PICNIC_KIT",
+            "defaultPrice": ""
+          },
+          {
+            "label": "Boomerang bags",
+            "value": "BMRNG_BAG",
+            "defaultPrice": ""
+          }
+        ]
+      }
+    },
+    {
+      "label": "Tag 'N Test",
+      "value": "TAG_TEST",
+      "defaultPrice": "",
+      "subMenu": {
+        "items": [
+          {
+            "label": "Testing",
+            "value": "TNT_TEST",
+            "defaultPrice": ""
+          },
+          {
+            "label": "Sale",
+            "value": "TNT_SALE",
+            "defaultPrice": ""
+          },
+          {
+            "label": "Sell on behalf of",
+            "value": "TNT_SOB",
+            "defaultPrice": ""
+          }
+        ]
+      }
+    },
+    {
+      "label": "Mulch bucket swap",
+      "value": "MLCH_BKT_SWP",
+      "defaultPrice": "3",
+      "subMenu": { "items": [] }
+    },
+    {
+      "label": "Battery Buckets",
+      "value": "BATT_BKT",
+      "defaultPrice": "13",
+      "subMenu": { "items": [] }
+    },
+    {
+      "label": "Battery Weight",
+      "value": "BATT_WGT",
+      "defaultPrice": "",
+      "subMenu": { "items": [] }
+    },
+    {
+      "label": "Plant Sales",
+      "value": "PLANT_SALE",
+      "defaultPrice": "",
+      "subMenu": { "items": [] }
+    },
+    {
+      "label": "Refillery",
+      "value": "REFILL",
+      "defaultPrice": "",
+      "subMenu": {
+        "items": [
+          {
+            "label": "Dishwash",
+            "value": "DISHWASH",
+            "defaultPrice": ""
+          },
+          {
+            "label": "Cleaning Wash",
+            "value": "CLEANING_WASH",
+            "defaultPrice": ""
+          },
+          {
+            "label": "Laundry Detergent",
+            "value": "LAUNDRY_DETERGENT",
+            "defaultPrice": ""
+          }
+        ]
+      }
+    },
+    {
+      "label": "Toki Straws",
+      "value": "TOKI_STRAWS",
+      "defaultPrice": "",
+      "subMenu": { "items": [] }
+    },
+    {
+      "label": "Reusable bags or picnic kits",
+      "value": "REUSE_BAG_PICNIC",
+      "defaultPrice": "",
+      "subMenu": { "items": [] }
+    },
+    {
+      "label": "Coastal Cabin Products",
+      "value": "COASTAL_CABIN",
+      "defaultPrice": "",
+      "subMenu": { "items": [] }
+    },
+    {
+      "label": "Items for sale",
+      "value": "ITEMS_FOR_SALE",
+      "defaultPrice": "",
+      "subMenu": { "items": [] }
+    }
+  ]
+}

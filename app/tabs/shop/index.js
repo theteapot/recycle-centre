@@ -21,6 +21,8 @@ import { DialogComponent, DialogContent } from "react-native-dialog-component";
 import Header from "../../components/header";
 import ModalPicker from "react-native-modal-selector";
 import style from "react-native-modal-selector/style";
+import GenericPicker from "../../components/generic-picker";
+import { productTypes } from "./productTypes.json";
 
 export default class Recycle extends Component {
   constructor(props) {
@@ -32,91 +34,14 @@ export default class Recycle extends Component {
     ];
 
     let index = 0;
-    this.productTypes = [
-      // {
-      //   key: index++,
-      //   label: "Select a product",
-      //   value: "",
-      //   defaultPrice: "",
-      // },
-      {
-        key: index++,
-        label: "Biochar (bucket)",
-        value: "BIOCHAR_BKT",
-        defaultPrice: "",
-      },
-      {
-        key: index++,
-        label: "Biochar (1L volume)",
-        value: "BIOCHAR_VOL",
-        defaultPrice: "",
-      },
-      {
-        key: index++,
-        label: "Community Crafts",
-        value: "COMM_CRAFT",
-        defaultPrice: "",
-      },
-      {
-        key: index++,
-        label: "Tag 'N Test",
-        value: "TAG_TEST",
-        defaultPrice: "",
-      },
-      {
-        key: index++,
-        label: "Mulch bucket swap",
-        value: "MLCH_BKT_SWP",
-        defaultPrice: "3",
-      },
-      {
-        key: index++,
-        label: "Battery Buckets",
-        value: "BATT_BKT",
-        defaultPrice: "13",
-      },
-      {
-        key: index++,
-        label: "Battery Weight",
-        value: "BATT_WGT",
-        defaultPrice: "",
-      },
-      {
-        key: index++,
-        label: "Plant Sales",
-        value: "PLANT_SALE",
-        defaultPrice: "",
-      },
-      { key: index++, label: "Refillery", value: "REFILL", defaultPrice: "" },
-      {
-        key: index++,
-        label: "Toki Straws",
-        value: "TOKI_STRAWS",
-        defaultPrice: "",
-      },
-      {
-        key: index++,
-        label: "Reusable bags or picnic kits",
-        value: "REUSE_BAG_PICNIC",
-        defaultPrice: "",
-      },
-      {
-        key: index++,
-        label: "Coastal Cabin Products",
-        value: "COASTAL_CABIN",
-        defaultPrice: "",
-      },
-      {
-        key: index++,
-        label: "Items for sale",
-        value: "ITEMS_FOR_SALE",
-        defaultPrice: "",
-      },
-    ];
+    this.productTypes = productTypes;
 
     this.state = {
       paymentType: "cash",
       selectedProduct: "",
+      selectedSubProduct: "",
+      selectedKey: "",
+      selectedSubKey: "",
       productQuantity: 1,
       paymentAmount: "",
       loading: false,
@@ -128,13 +53,25 @@ export default class Recycle extends Component {
     this.submitOrder = this.submitOrder.bind(this);
     this.removeFromOrder = this.removeFromOrder.bind(this);
     this.setSelectedValue = this.setSelectedValue.bind(this);
+    this.setSelectedSubValue = this.setSelectedSubValue.bind(this);
     this.showDialog = this.showDialog.bind(this);
+    this.renderSubPicker = this.renderSubPicker.bind(this);
   }
 
   setSelectedValue(value) {
+    console.log(value);
     this.setState({
       selectedProduct: value.value,
       selectedKey: value.key,
+      paymentAmount: value.defaultPrice,
+    });
+  }
+
+  setSelectedSubValue(value) {
+    // Used for selecting sub items of products
+    this.setState({
+      selectedSubProduct: value.value,
+      selectedSubKey: value.key,
       paymentAmount: value.defaultPrice,
     });
   }
@@ -168,10 +105,24 @@ export default class Recycle extends Component {
   addToOrder() {
     // Get the values of the current item from state
     // Then set the payment amount back to 0
-    const { selectedProduct, paymentAmount, productQuantity } = this.state;
-    const product = this.productTypes.find(
-      ({ value }) => value === selectedProduct
-    );
+    const {
+      selectedProduct,
+      paymentAmount,
+      productQuantity,
+      selectedSubProduct,
+    } = this.state;
+
+    let product;
+    if (selectedSubProduct === "") {
+      product = this.productTypes.find(
+        ({ value }) => value === selectedProduct
+      );
+    } else {
+      product = this.productTypes
+        .find(({ value }) => value === selectedProduct)
+        .subMenu.items.find(({ value }) => value === selectedSubProduct);
+    }
+
     this.setState({
       order: [
         ...this.state.order,
@@ -193,6 +144,28 @@ export default class Recycle extends Component {
     this.dialogComponent.show();
   }
 
+  renderSubPicker() {
+    let { selectedProduct } = this.state;
+    let selectedProductType = this.productTypes.find(
+      ({ value }) => value == selectedProduct
+    );
+    if (!selectedProductType) {
+      return null;
+    } else if (selectedProductType.subMenu.items.length === 0) {
+      return null;
+    } else {
+      return (
+        <GenericPicker
+          data={selectedProductType.subMenu.items}
+          onChange={(value) => this.setSelectedSubValue(value)}
+          selectedKey={this.state.selectedSubKey}
+          initValue={"Select sub-product"}
+          label={"SUB-PRODUCT:"}
+        />
+      );
+    }
+  }
+
   render() {
     return (
       <ScrollView>
@@ -211,150 +184,58 @@ export default class Recycle extends Component {
           <Header label="SHOP" />
 
           {/* Product Picker */}
+          <GenericPicker
+            data={this.productTypes}
+            initValue="Select a product type"
+            onChange={(value) => this.setSelectedValue(value)}
+            selectedKey={this.state.selectedKey}
+            label={"PRODUCT:"}
+          />
+          {/* Picker for sub items */}
+          {this.renderSubPicker()}
 
-          <View
-            style={{
-              width: "80%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              flexDirection: "row",
-            }}
-          >
-            <Text style={{ fontWeight: "bold", color: colors.secondary }}>
-              PRODUCT:
-            </Text>
-            <View
-              style={{
-                borderBottomColor: colors.secondary,
-                borderBottomWidth: 1,
-                width: "76%",
-              }}
-            >
-              <ModalPicker
-                optionStyle={{
-                  backgroundColor: colors.primary,
-                }}
-                optionTextStyle={{
-                  color: "white",
-                  textTransform: "uppercase",
-                }}
-                sectionStyle={{
-                  backgroundColor: colors.primary,
-                }}
-                cancelStyle={{
-                  backgroundColor: colors.primary,
-                  borderRadius: 5,
-                }}
-                cancelTextStyle={{
-                  textTransform: "uppercase",
-                  color: "white",
-                }}
-                selectStyle={{ borderWidth: 0 }}
-                selectedKey={this.state.selectedKey}
-                style={{ borderWidth: 0 }}
-                data={this.productTypes}
-                initValue="Select a product type"
-                onChange={(value) => this.setSelectedValue(value)}
-              />
-            </View>
-          </View>
           {/* Quantity Picker */}
-          <View
-            style={{
-              width: "80%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              flexDirection: "row",
-              paddingTop: 10,
-            }}
-          >
-            <Text
-              style={{
-                fontWeight: "bold",
-                color: colors.secondary,
-              }}
-            >
-              QTY:
-            </Text>
-            <View
-              style={{
-                width: "76%",
-                borderBottomWidth: 1,
-              }}
-            >
-              <Input
-                style={{
-                  fontStyle: "normal",
-                  width: "76%",
-                  fontSize: 16,
-                  textAlign: "left",
-                  borderBottomWidth: 0,
-                  marginTop: 0,
-                  paddingLeft: 7,
-                }}
-                keyboardType="decimal-pad"
-                placeholder="Default (1)"
-                value={this.state.productQuantity}
-                onChangeText={(value) =>
-                  this.setState({ productQuantity: value })
-                }
-                onSubmit={(value) =>
-                  this.setState({ productQuantity: this.state.productQuantity })
-                }
-              ></Input>
-            </View>
-          </View>
 
-          {/* Price input */}
-          <View
+          <Input
+            label="QTY:"
             style={{
-              width: "80%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              flexDirection: "row",
-              paddingTop: 10,
+              fontStyle: "normal",
+              width: "76%",
+              fontSize: 16,
+              textAlign: "left",
+              borderBottomWidth: 0,
+              marginTop: 0,
+              paddingLeft: 7,
             }}
-          >
-            <Text
-              style={{
-                fontWeight: "bold",
-                color: colors.secondary,
-              }}
-            >
-              PRICE:
-            </Text>
-            <View
-              style={{
-                width: "76%",
-                borderBottomWidth: 1,
-              }}
-            >
-              <Input
-                style={{
-                  fontStyle: "normal",
-                  width: "76%",
-                  fontSize: 16,
-                  textAlign: "left",
-                  borderBottomWidth: 0,
-                  marginTop: 0,
-                  paddingLeft: 7,
-                }}
-                width="78%"
-                keyboardType="decimal-pad"
-                value={this.state.paymentAmount}
-                onChangeText={(value) =>
-                  this.setState({ paymentAmount: value })
-                }
-                placeholder="Enter price per unit ($) *"
-                onSubmit={(value) =>
-                  this.setState({ paymentAmount: this.state.paymentAmount })
-                }
-              />
-            </View>
-          </View>
+            keyboardType="decimal-pad"
+            placeholder="Default (1)"
+            value={this.state.productQuantity}
+            onChangeText={(value) => this.setState({ productQuantity: value })}
+            onSubmit={(value) =>
+              this.setState({ productQuantity: this.state.productQuantity })
+            }
+          ></Input>
+
+          <Input
+            label="PRICE:"
+            style={{
+              fontStyle: "normal",
+              width: "76%",
+              fontSize: 16,
+              textAlign: "left",
+              borderBottomWidth: 0,
+              marginTop: 0,
+              paddingLeft: 7,
+            }}
+            width="78%"
+            keyboardType="decimal-pad"
+            value={this.state.paymentAmount}
+            onChangeText={(value) => this.setState({ paymentAmount: value })}
+            placeholder="Enter price per unit ($) *"
+            onSubmit={(value) =>
+              this.setState({ paymentAmount: this.state.paymentAmount })
+            }
+          />
 
           {/* Add item to order */}
           <AsyncButton
