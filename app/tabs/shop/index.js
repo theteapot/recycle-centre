@@ -129,6 +129,7 @@ export default class Recycle extends Component {
         { ...product, paymentAmount, productQuantity },
       ],
       selectedProduct: "",
+      selectedSubProduct: "",
       selectedKey: "",
       paymentAmount: "",
       productQuantity: 1,
@@ -270,6 +271,7 @@ export default class Recycle extends Component {
             label="SUBMIT"
             onPress={this.submitOrder}
           ></AsyncButton>
+
           {/* Text for error reporting */}
           <Text
             style={{
