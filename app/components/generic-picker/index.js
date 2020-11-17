@@ -40,7 +40,7 @@ export default class GenericPicker extends Component {
           selectedKey={this.props.selectedKey}
           style={{
             borderWidth: 0,
-            flexGrow: "2",
+            flexGrow: 2,
             justifyContent: "center",
           }}
           data={this.props.data}

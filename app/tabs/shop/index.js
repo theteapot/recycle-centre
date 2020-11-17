@@ -128,6 +128,7 @@ export default class Recycle extends Component {
         ...this.state.order,
         { ...product, paymentAmount, productQuantity },
       ],
+      selectedSubProduct: "",
       selectedProduct: "",
       selectedSubProduct: "",
       selectedKey: "",
