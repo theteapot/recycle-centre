@@ -34,6 +34,7 @@ async function getOrders() {
   let result = await (await collection.aggregate([])).toArray();
   result = result.map((record) => ({
     ...record,
+    total: record.paymentAmount * record.productQuantity,
     timestamp: new moment(record.timestamp._d)
       .tz("Pacific/Auckland")
       .toString(),

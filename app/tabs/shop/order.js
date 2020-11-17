@@ -16,6 +16,7 @@ export default class Order extends Component {
   renderOrderLine({ value, label, paymentAmount, productQuantity }, index) {
     return (
       <TouchableHighlight
+        key={index}
         index={index}
         style={{
           borderBottomWidth: 1,

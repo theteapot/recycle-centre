@@ -1,6 +1,4 @@
-sudo docker login docker.io
-sudo npm run docker-build
-sudo npm run docker-push
+./build-docker.sh
 # ~/.ssh/connect-to-recycle-centre-aws
 # docker stop
 # docker image pull theteapot/recycle-centre-server:latest

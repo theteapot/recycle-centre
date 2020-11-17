@@ -24,6 +24,7 @@ paymentRouter.get("/csv", async (req, res, next) => {
   stringify(
     result,
     {
+      header: true,
       columns: [
         "timestamp",
         "productType",
@@ -39,15 +40,18 @@ paymentRouter.get("/csv", async (req, res, next) => {
 paymentRouter.get("/shop-csv", async (req, res, next) => {
   res.set({ "Content-Disposition": 'attachment; filename="orders.csv"' });
   let result = await getOrders();
+  console.log(result);
   stringify(
     result,
     {
+      header: true,
       columns: [
-        "timestamp",
-        "label",
-        "value",
-        "paymentAmount",
-        "productQuantity",
+        { key: "timestamp", header: "timestamp" },
+        { key: "label", header: "label" },
+        { key: "value", header: "value" },
+        { key: "paymentAmount", header: "paymentAmount" },
+        { key: "productQuantity", header: "productQuantity" },
+        { key: "total", header: "total" },
       ],
     },
     (err, output) => res.send(output)

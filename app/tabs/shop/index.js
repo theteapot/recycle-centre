@@ -28,13 +28,18 @@ export default class Recycle extends Component {
   constructor(props) {
     super(props);
 
-    this.paymentTypeButtons = [
-      { label: "CASH", value: "cash", pressed: true },
-      { label: "EFTPOS", value: "EFTPOS", pressed: false },
-    ];
-
-    let index = 0;
-    this.productTypes = productTypes;
+    // Apply numeric keys to items for picker elements to use
+    this.productTypes = productTypes.map((product, key) => {
+      return {
+        ...product,
+        key,
+        subMenu: {
+          items: product.subMenu.items.map((subProduct, key) => {
+            return { ...subProduct, key };
+          }),
+        },
+      };
+    });
 
     this.state = {
       paymentType: "cash",
@@ -59,7 +64,6 @@ export default class Recycle extends Component {
   }
 
   setSelectedValue(value) {
-    console.log(value);
     this.setState({
       selectedProduct: value.value,
       selectedKey: value.key,
@@ -67,7 +71,7 @@ export default class Recycle extends Component {
     });
   }
 
-  setSelectedSubValue(value) {
+  setSelectedSubValue(value, index) {
     // Used for selecting sub items of products
     this.setState({
       selectedSubProduct: value.value,
@@ -80,6 +84,9 @@ export default class Recycle extends Component {
     let { order } = this.state;
 
     try {
+      this.setState({ loading: true });
+      console.log(`${SERVER}/payments/shop`);
+
       let response = await fetch(`${SERVER}/payments/shop`, {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -124,16 +131,16 @@ export default class Recycle extends Component {
     }
 
     this.setState({
+      selectedSubProduct: "",
+      selectedProduct: "",
+      selectedKey: "",
+      selectedSubKey: "",
+      paymentAmount: "",
+      productQuantity: 1,
       order: [
         ...this.state.order,
         { ...product, paymentAmount, productQuantity },
       ],
-      selectedSubProduct: "",
-      selectedProduct: "",
-      selectedSubProduct: "",
-      selectedKey: "",
-      paymentAmount: "",
-      productQuantity: 1,
     });
   }
 
@@ -151,27 +158,21 @@ export default class Recycle extends Component {
     let selectedProductType = this.productTypes.find(
       ({ value }) => value == selectedProduct
     );
-    if (!selectedProductType) {
+    if (selectedProduct === "" || !selectedProductType) {
       return null;
     } else if (selectedProductType.subMenu.items.length === 0) {
       return null;
     } else {
-      return (
-        <GenericPicker
-          data={selectedProductType.subMenu.items}
-          onChange={(value) => this.setSelectedSubValue(value)}
-          selectedKey={this.state.selectedSubKey}
-          initValue={"Select sub-product"}
-          label={"SUB-PRODUCT:"}
-        />
-      );
+      return null;
     }
   }
 
   render() {
     return (
-      <ScrollView>
-        <KeyboardAvoidingView
+      <ScrollView contentContainerStyle={{ height: "100%" }}>
+        {this.state.loading && <FullscreenLoader />}
+
+        <View
           behavior="height"
           enabled
           style={{
@@ -181,10 +182,7 @@ export default class Recycle extends Component {
             paddingTop: 20,
           }}
         >
-          {this.state.loading && <FullscreenLoader />}
-
           <Header label="SHOP" />
-
           {/* Product Picker */}
           <GenericPicker
             data={this.productTypes}
@@ -194,7 +192,19 @@ export default class Recycle extends Component {
             label={"PRODUCT:"}
           />
           {/* Picker for sub items */}
-          {this.renderSubPicker()}
+          {this.state.selectedProduct !== "" &&
+            this.productTypes[this.state.selectedKey].subMenu.items.length >
+              0 && (
+              <GenericPicker
+                data={this.productTypes[this.state.selectedKey].subMenu.items}
+                onChange={(value, index) =>
+                  this.setSelectedSubValue(value, index)
+                }
+                selectedKey={this.state.selectedSubKey}
+                initValue={"Select sub-product"}
+                label={"SUB-PRODUCT:"}
+              />
+            )}
 
           {/* Quantity Picker */}
 
@@ -286,7 +296,7 @@ export default class Recycle extends Component {
             {this.state.statusText}
           </Text>
           <View style={{ flex: 1 }} />
-        </KeyboardAvoidingView>
+        </View>
       </ScrollView>
     );
   }

@@ -10,6 +10,7 @@
       "label": "Biochar (1L volume)",
       "value": "BIOCHAR_VOL",
       "defaultPrice": "",
+
       "subMenu": { "items": [] }
     },
     {
