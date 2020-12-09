@@ -20,7 +20,9 @@ async function getPayments() {
   let result = await (await collection.aggregate([])).toArray();
   result = result.map((record) => ({
     ...record,
-    timestamp: new moment(record.timestamp).tz("Pacific/Auckland").toString(),
+    timestamp: new moment(record.timestamp._d || record.timestamp)
+      .tz("Pacific/Auckland")
+      .toString(),
   }));
   db.close();
   return result;
