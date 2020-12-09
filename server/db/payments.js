@@ -35,7 +35,7 @@ async function getOrders() {
   result = result.map((record) => ({
     ...record,
     total: record.paymentAmount * record.productQuantity,
-    timestamp: new moment(record.timestamp._d)
+    timestamp: new moment(record.timestamp._d || record.timestamp)
       .tz("Pacific/Auckland")
       .toString(),
   }));
