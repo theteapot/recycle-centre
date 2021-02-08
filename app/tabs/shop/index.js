@@ -13,7 +13,8 @@ import Button from "../../components/button";
 import Input from "../../components/input";
 import TextInput from "../../components/text-input";
 import AsyncButton from "../../components/async-button";
-import { SERVER } from "../../constants";
+// import { SERVER } from "../../constants";
+const SERVER = process.env.SERVER;
 import FullscreenLoader from "../../components/fullscreen-loader";
 import { colors } from "../../styles";
 import Order from "./order";
@@ -189,7 +190,7 @@ export default class Recycle extends Component {
             initValue="Select a product type"
             onChange={(value) => this.setSelectedValue(value)}
             selectedKey={this.state.selectedKey}
-            label={"PRODUCT:"}
+            label={"PRODUCT"}
           />
           {/* Picker for sub items */}
           {this.state.selectedProduct !== "" &&
@@ -209,7 +210,7 @@ export default class Recycle extends Component {
           {/* Quantity Picker */}
 
           <Input
-            label="QTY:"
+            label="QTY"
             style={{
               fontStyle: "normal",
               width: "76%",
@@ -229,7 +230,7 @@ export default class Recycle extends Component {
           ></Input>
 
           <Input
-            label="PRICE:"
+            label="PRICE"
             style={{
               fontStyle: "normal",
               width: "76%",

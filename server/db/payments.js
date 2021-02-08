@@ -1,4 +1,4 @@
-const { connect } = require("./index");
+const { connect } = require("./helpers");
 const moment = require("moment-timezone");
 
 async function createPayment(body) {

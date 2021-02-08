@@ -1,12 +1,9 @@
-var MongoClient = require("mongodb").MongoClient;
-var url = `mongodb://localhost:27017/${process.env.DB_NAME}`;
-
-async function connect() {
-  const db = await MongoClient.connect(url);
-  console.log(`connected to db ${url}`);
-  return { db, dbo: db.db(process.env.DB_NAME) };
-}
+const payments = require("./payments");
+const history = require("./history");
+const helpers = require("./helpers");
 
 module.exports = {
-  connect,
+  payments,
+  helpers,
+  history,
 };

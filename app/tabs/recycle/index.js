@@ -10,7 +10,8 @@ import Button from "../../components/buttons";
 import Input from "../../components/input";
 import TextInput from "../../components/text-input";
 import AsyncButton from "../../components/async-button";
-import { SERVER } from "../../constants";
+// import { SERVER } from "../../constants";
+const SERVER = process.env.SERVER;
 import FullscreenLoader from "../../components/fullscreen-loader";
 import { colors } from "../../styles";
 import GenericPicker from "../../components/generic-picker";
@@ -133,13 +134,13 @@ export default class Recycle extends Component {
 
           <GenericPicker
             data={this.state.productTypeButtons}
-            label="RECYCLING:"
+            label="RECYCLING"
             initValue="Pick recycling product"
             onChange={(value) => this.setSelectedValue(value)}
           />
 
           <TextInput
-            label="COMMENT:"
+            label="COMMENT"
             placeholder={"Enter comment"}
             value={this.state.comment}
             onChangeText={(comment) => this.setState({ comment })}
@@ -149,12 +150,12 @@ export default class Recycle extends Component {
           />
           <Input
             keyboardType="decimal-pad"
-            label="PRICE:"
+            label="PRICE"
             value={this.state.paymentAmount}
             onChangeText={(value) => this.setState({ paymentAmount: value })}
             placeholder="Enter amount *"
           />
-          <AsyncButton label="Done" onPress={this.submitRecycle} />
+          <AsyncButton label="DONE" onPress={this.submitRecycle} />
           <Text
             style={{
               paddingTop: 10,

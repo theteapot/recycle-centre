@@ -37,6 +37,7 @@ export default class InputParent extends Component {
             style={{
               fontWeight: "bold",
               color: colors.secondaryText,
+              textAlign: "center",
               minWidth: 80,
             }}
           >

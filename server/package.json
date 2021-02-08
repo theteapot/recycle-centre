@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "start-dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "./build-docker.sh && ./deploy.sh",
     "docker-build": "sudo docker build ./ -t theteapot/recycle-centre-server:latest --no-cache",
     "docker-push": "sudo docker push theteapot/recycle-centre-server:latest"
   },

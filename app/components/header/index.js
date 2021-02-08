@@ -12,6 +12,7 @@ export default class Header extends Component {
           paddingTop: 10,
           borderBottomColor: colors.secondary,
           borderBottomWidth: 1,
+          ...this.props.style,
         }}
       >
         <Text
@@ -30,4 +31,5 @@ export default class Header extends Component {
 
 Header.propTypes = {
   label: PropTypes.string,
+  style: PropTypes.object,
 };

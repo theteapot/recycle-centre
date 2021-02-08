@@ -1,28 +1,19 @@
-import React, { Component } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  KeyboardAvoidingView,
-  ScrollView,
-} from "react-native";
-import Button from "../components/buttons";
-import Input from "../components/input";
-import TextInput from "../components/text-input";
-import AsyncButton from "../components/async-button";
-import { SERVER } from "../constants";
-import FullscreenLoader from "../components/fullscreen-loader";
+import React from "react";
 import { colors } from "../styles";
 import { createAppContainer } from "react-navigation";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import RecycleScreen from "../tabs/recycle";
 import ShopScreen from "../tabs/shop";
+import HistoryScreen from "../tabs/history";
 import Ionicons from "react-native-vector-icons/Ionicons";
+
+// https://github.com/oblador/react-native-vector-icons
 
 const TabNavigator = createBottomTabNavigator(
   {
     Recycle: RecycleScreen,
     Shop: ShopScreen,
+    History: HistoryScreen,
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -36,9 +27,10 @@ const TabNavigator = createBottomTabNavigator(
             : "ios-information-circle-outline";
         } else if (routeName === "Shop") {
           iconName = focused ? "ios-list-box" : "ios-list";
+        } else if (routeName === "History") {
+          iconName = "ios-time";
         }
 
-        // You can return any component that you like here!
         return <IconComponent name={iconName} size={25} color={tintColor} />;
       },
     }),
