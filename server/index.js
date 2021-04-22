@@ -1,11 +1,14 @@
 require("dotenv").config();
 const express = require("express");
-const app = express();
 const json = require("body-parser").json();
 const { paymentRouter, historyRouter } = require("./routes");
 const { helpers } = require("./db");
+const morgan = require("morgan");
+
+const app = express();
 
 app.use(json);
+app.use(morgan("tiny"));
 app.use("/payments", paymentRouter);
 app.use("/history", historyRouter);
 

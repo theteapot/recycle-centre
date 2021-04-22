@@ -56,7 +56,9 @@ async function createOrder({ order }) {
       })
     );
   }
-  console.log(result);
+  for (r of result) {
+    console.log(r.message.documents);
+  }
   db.close();
   return result;
 }

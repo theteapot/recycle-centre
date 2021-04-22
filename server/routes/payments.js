@@ -54,7 +54,6 @@ paymentRouter.get("/shop-csv", async (req, res, next) => {
 });
 
 paymentRouter.post("/shop", async (req, res, next) => {
-  console.log("got /shop request");
   let result = await payments.createOrder(req.body);
   res.json(result);
 });

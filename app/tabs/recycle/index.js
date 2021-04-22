@@ -11,7 +11,7 @@ import Input from "../../components/input";
 import TextInput from "../../components/text-input";
 import AsyncButton from "../../components/async-button";
 // import { SERVER } from "../../constants";
-const SERVER = process.env.SERVER;
+const SERVER = process.env.REACT_APP_SERVER;
 import FullscreenLoader from "../../components/fullscreen-loader";
 import { colors } from "../../styles";
 import GenericPicker from "../../components/generic-picker";
@@ -60,12 +60,11 @@ export default class Recycle extends Component {
   }
 
   async submitRecycle(value) {
-    {
-      this.setState({ paymentAmount: value, loading: true });
+    this.setState({ paymentAmount: value, loading: true });
 
-      const { paymentAmount, paymentType, productType, comment } = this.state;
+    const { paymentAmount, paymentType, productType, comment } = this.state;
 
-      // try {
+    try {
       await fetch(`${SERVER}/payments`, {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -87,14 +86,12 @@ export default class Recycle extends Component {
         productTypeButtons: this.productTypeButtons,
         paymentTypeButtons: this.paymentTypeButtons,
       });
-      // } catch (error) {
-      //   this.setState({
-      //     loading: false,
-      //     errorUploading: true,
-      //     statusText: `Upload unsuccessful ${JSON.stringify(error)}`
-      //   });
-      // }
-      // }
+    } catch (error) {
+      this.setState({
+        loading: false,
+        errorUploading: true,
+        statusText: `Upload unsuccessful ${JSON.stringify(error)}`,
+      });
     }
   }
 
@@ -111,7 +108,7 @@ export default class Recycle extends Component {
             paddingTop: 20,
           }}
         >
-          <Header label="RECYCLING" />
+          <Header label={`RECYCLING`} />
           {this.state.loading && <FullscreenLoader />}
           <Button
             style={{ zIndex: 1 }}

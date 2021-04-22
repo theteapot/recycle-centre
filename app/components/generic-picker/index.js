@@ -37,6 +37,7 @@ export default class GenericPicker extends Component {
             color: "white",
           }}
           selectStyle={{ borderWidth: 0 }}
+          selectTextStyle={{ flexWrap: 1 }}
           selectedKey={this.props.selectedKey}
           style={{
             borderWidth: 0,

@@ -14,7 +14,7 @@ import Input from "../../components/input";
 import TextInput from "../../components/text-input";
 import AsyncButton from "../../components/async-button";
 // import { SERVER } from "../../constants";
-const SERVER = process.env.SERVER;
+const SERVER = process.env.REACT_APP_SERVER;
 import FullscreenLoader from "../../components/fullscreen-loader";
 import { colors } from "../../styles";
 import Order from "./order";
@@ -23,7 +23,7 @@ import Header from "../../components/header";
 import ModalPicker from "react-native-modal-selector";
 import style from "react-native-modal-selector/style";
 import GenericPicker from "../../components/generic-picker";
-import { productTypes } from "./productTypes.json";
+import { productTypes } from "./productsBySupplier.json";
 
 export default class Recycle extends Component {
   constructor(props) {
@@ -49,7 +49,7 @@ export default class Recycle extends Component {
       selectedKey: "",
       selectedSubKey: "",
       productQuantity: 1,
-      paymentAmount: "",
+      paymentAmount: 0,
       loading: false,
       statusText: "",
       order: [],
@@ -86,8 +86,6 @@ export default class Recycle extends Component {
 
     try {
       this.setState({ loading: true });
-      console.log(`${SERVER}/payments/shop`);
-
       let response = await fetch(`${SERVER}/payments/shop`, {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -170,19 +168,19 @@ export default class Recycle extends Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={{ height: "100%" }}>
-        {this.state.loading && <FullscreenLoader />}
-
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View
           behavior="height"
           enabled
           style={{
-            justifyContent: "flex-end",
             alignItems: "center",
-            flex: 1,
+            flexGrow: 1,
             paddingTop: 20,
+            paddingBottom: 20,
           }}
         >
+          {this.state.loading && <FullscreenLoader />}
+
           <Header label="SHOP" />
           {/* Product Picker */}
           <GenericPicker
@@ -198,8 +196,9 @@ export default class Recycle extends Component {
               0 && (
               <GenericPicker
                 data={this.productTypes[this.state.selectedKey].subMenu.items}
-                onChange={(value, index) =>
-                  this.setSelectedSubValue(value, index)
+                onChange={
+                  (value, index) => this.setSelectedSubValue(value, index)
+                  // this.setSelectedValue(value, index)
                 }
                 selectedKey={this.state.selectedSubKey}
                 initValue={"Select sub-product"}
@@ -245,7 +244,7 @@ export default class Recycle extends Component {
             value={this.state.paymentAmount}
             onChangeText={(value) => this.setState({ paymentAmount: value })}
             placeholder="Enter price per unit ($) *"
-            onSubmit={(value) =>
+            onSubmitEditing={(value) =>
               this.setState({ paymentAmount: this.state.paymentAmount })
             }
           />
@@ -296,7 +295,6 @@ export default class Recycle extends Component {
           >
             {this.state.statusText}
           </Text>
-          <View style={{ flex: 1 }} />
         </View>
       </ScrollView>
     );

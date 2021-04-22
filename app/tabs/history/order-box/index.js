@@ -30,8 +30,9 @@ export default class OrderBox extends Component {
           <Text
             style={{
               fontSize: 12,
-              backgroundColor: colors.primaryDark,
-              color: colors.secondaryText,
+              backgroundColor: colors.white,
+              color: colors.primaryDark,
+              paddingTop: 5,
               borderBottomLeftRadius: 5,
               borderBottomRightRadius: 5,
               paddingLeft: 2,

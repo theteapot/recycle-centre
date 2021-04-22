@@ -22,7 +22,9 @@ export default function () {
         }}
         onSubmitEditing={this.props.onSubmitEditing}
         returnKeyType="Done"
-        onChangeText={this.props.onChangeText}
+        onChangeText={(value) => {
+          this.props.onChangeText(value);
+        }}
       />
     </InputParent>
   );

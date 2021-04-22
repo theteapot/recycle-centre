@@ -1,0 +1,455 @@
+{
+  "productTypes": [
+    {
+      "label": "Biochar",
+      "value": "biochar",
+      "subMenu": {
+        "items": [
+          {
+            "label": "Biochar buckets - 15L including bucket",
+            "value": "bchar15L",
+            "defaultPrice": 20
+          },
+          {
+            "label": "Biochar buckets - 15L refill",
+            "value": "bchar15Lrefil",
+            "defaultPrice": 15
+          },
+          {
+            "label": "Biochar by the litre",
+            "value": "bcharlitre",
+            "defaultPrice": 1
+          },
+          {
+            "label": "Biochar - 2L container with label",
+            "value": "bchar2L",
+            "defaultPrice": 4
+          }
+        ]
+      }
+    },
+    {
+      "label": "Bokashi",
+      "value": "Bokashi",
+      "subMenu": {
+        "items": [
+          { "label": "Bokashi kit", "value": "bokashikit", "defaultPrice": 45 },
+          {
+            "label": "Bokashi mulch bucket swap",
+            "value": "bokashswapm",
+            "defaultPrice": 3
+          },
+          {
+            "label": "bokashi mulch bucket with biochar swap",
+            "value": "bokashswapb",
+            "defaultPrice": 4
+          }
+        ]
+      }
+    },
+    {
+      "label": "HCZW",
+      "value": "HCZW",
+      "subMenu": {
+        "items": [
+          {
+            "label": "food bucket only 15L",
+            "value": "bucketonly",
+            "defaultPrice": 5
+          },
+          {
+            "label": "ants away liquid",
+            "value": "zwantsaway",
+            "defaultPrice": 0
+          },
+          { "label": "Seedlings", "value": "zwseedlings", "defaultPrice": 6.3 },
+          {
+            "label": "Seedlings - cherimoya",
+            "value": "zwcherimoya",
+            "defaultPrice": 8
+          },
+          { "label": "Stompers", "value": "zwstomper", "defaultPrice": 4 },
+          { "label": "Strap lids", "value": "zwstraplid", "defaultPrice": 20 },
+          { "label": "Tag N Test", "value": "zwtagntest", "defaultPrce": 0 },
+          {
+            "label": "Toothpaste powder - 250ml",
+            "value": "zwtoothpowd250",
+            "defaultPrice": 8.9
+          },
+          {
+            "label": "Toothpaste powder - 300ml",
+            "value": "zwtoothpowd300",
+            "defaultPrice": 10.6
+          },
+          {
+            "label": "Toothpaste powder - 350ml",
+            "value": "zwtoothpowd350",
+            "defaultPrice": 13
+          },
+          {
+            "label": "Good Crips Food Caddy",
+            "value": "zwfoodcaddy",
+            "defaultPrice": 50
+          },
+          {
+            "label": "vermiliquid - 500ml",
+            "value": "zqvermiliq",
+            "defaultPrice": 3
+          }
+        ]
+      }
+    },
+    {
+      "label": "Coastal Cabin",
+      "value": "Coastal Cabin",
+      "subMenu": {
+        "items": [
+          { "label": "Rethink bags", "value": "ccrtbag", "defaultPrice": 0 },
+          {
+            "label": "Rethink produce bags",
+            "value": "ccrtprodbag",
+            "defaultPrice": 0
+          },
+          { "label": "bamboo straw", "value": "ccstraw", "defaultPrice": 0 },
+          {
+            "label": "cutlery wraps - set and straw",
+            "value": "ccwrapcut",
+            "defaultPrice": 28
+          },
+          {
+            "label": "cutlery wraps - bag only - drawstring",
+            "value": "ccwrapdraw",
+            "defaultPrice": 15
+          },
+          {
+            "label": "cutlery wraps - bag only - tie",
+            "value": "ccwraptie",
+            "defaultPrice": 10
+          },
+          {
+            "label": "breast shields",
+            "value": "ccbshield",
+            "defaultPrice": 24
+          },
+          { "label": "face towel", "value": "ccftowel", "defaultPrice": 17 }
+        ]
+      }
+    },
+    {
+      "label": "Ecostore",
+      "value": "Ecostore",
+      "subMenu": {
+        "items": [
+          {
+            "label": "Ecostore Cleaner - 500ml",
+            "value": "ecoclean500",
+            "defaultPrice": 4
+          },
+          {
+            "label": "Ecostore Cleaner - 750ml",
+            "value": "ecoclean750",
+            "defaultPrice": 5.5
+          },
+          {
+            "label": "Ecostore Cleaner - 1L",
+            "value": "ecoclean1000",
+            "defaultPrice": 7.3
+          },
+          {
+            "label": "Ecostore Cleaner - 2L",
+            "value": "ecoclean2000",
+            "defaultPrice": 14.6
+          },
+          {
+            "label": "Ecostore Dishwash - 500ml",
+            "value": "ecodish500",
+            "defaultPrice": 3
+          },
+          {
+            "label": "Ecostore Dishwash - 750ml",
+            "value": "ecodish750",
+            "defaultPrice": 4.5
+          },
+          {
+            "label": "Ecostore Dishwash - 1L",
+            "value": "ecodish1000",
+            "defaultPrice": 6
+          },
+          {
+            "label": "Ecostore Dishwash - 2L",
+            "value": "ecodish2000",
+            "defaultPrice": 11
+          },
+          {
+            "label": "Ecostore Laundry - 500ml",
+            "value": "ecolaund500",
+            "defaultPrice": 4
+          },
+          {
+            "label": "Ecostore Laundry - 750ml",
+            "value": "ecolaund750",
+            "defaultPrice": 5.5
+          },
+          {
+            "label": "Ecostore Laundry - 1L",
+            "value": "ecolaund1000",
+            "defaultPrice": 8
+          },
+          {
+            "label": "Ecostore Laundry - 2L",
+            "value": "ecolaund2000",
+            "defaultPrice": 14
+          }
+        ]
+      }
+    },
+    {
+      "label": "E-Cycle",
+      "value": "E-Cycle",
+      "subMenu": {
+        "items": [
+          { "label": "Battery Buckets", "value": "batbuck", "defaultPrice": 35 }
+        ]
+      }
+    },
+    {
+      "label": "Goodlife",
+      "value": "Goodlife",
+      "subMenu": {
+        "items": [
+          {
+            "label": "Sprouting jar kit - 1L",
+            "value": "glsproutkit1",
+            "defaultPrice": 20.95
+          },
+          {
+            "label": "Sprouting jar kit - 500ml",
+            "value": "glsproutkit500",
+            "defaultPrice": 17.5
+          },
+          {
+            "label": "refil pump pot jar 500ml",
+            "value": "glppot500",
+            "defaultPrice": 14.95
+          },
+          {
+            "label": "refil pump pot jar 1L",
+            "value": "glppot1",
+            "defaultPrice": 16.95
+          },
+          {
+            "label": "alfalfa sprouting seeds - 100gms",
+            "value": "glseedalf",
+            "defaultPrice": 7.95
+          },
+          {
+            "label": "spicy mix sprouting seeds - 100gms",
+            "value": "glseedspicy",
+            "defaultPrice": 6.95
+          },
+          {
+            "label": "reusable silicon bags - 1.5lr",
+            "value": "glsilbag1.5",
+            "defaultPrice": 19.95
+          }
+        ]
+      }
+    },
+    {
+      "label": "Good to grow",
+      "value": "Good to grow",
+      "subMenu": {
+        "items": [
+          {
+            "label": "mycogro hort AMF - 250gms",
+            "value": "amf250",
+            "defaultPrice": 0
+          }
+        ]
+      }
+    },
+    {
+      "label": "HBZW",
+      "value": "HBZW",
+      "subMenu": {
+        "items": [
+          {
+            "label": "Recycling Box and Bags",
+            "value": "zwrecbags",
+            "defaultPrice": 0
+          }
+        ]
+      }
+    },
+    {
+      "label": "Mahurangi Honey",
+      "value": "Mahurangi Honey",
+      "subMenu": {
+        "items": [
+          {
+            "label": "Manuka - 150MGO - 480g",
+            "value": "mhman150",
+            "defaultPrice": 28
+          },
+          {
+            "label": "Manuka - 270 MGO - 480g",
+            "value": "mhman270",
+            "defaultPrice": 36
+          },
+          { "label": "Kanuka - 480g", "value": "mhkan", "defaultPrice": 16.5 },
+          {
+            "label": "Pohutakawa - 480g",
+            "value": "mhpoh",
+            "defaultPrice": 16.5
+          },
+          { "label": "wax blocks - 300g", "value": "mhwax", "defaultPrice": 13 }
+        ]
+      }
+    },
+    {
+      "label": "Meals in Steel",
+      "value": "Meals in Steel",
+      "subMenu": {
+        "items": [
+          {
+            "label": "Meals in Steel Tiffens leak proof bento box",
+            "value": "mstifbento",
+            "defaultPrice": 50
+          },
+          {
+            "label": "Meals in Steel Tiffens round",
+            "value": "mstifround",
+            "defaultPrice": 40
+          }
+        ]
+      }
+    },
+    {
+      "label": "Mens Shed",
+      "value": "Mens Shed",
+      "subMenu": {
+        "items": [
+          {
+            "label": "Recycling Station",
+            "value": "msrecystation",
+            "defaultPrice": 0
+          }
+        ]
+      }
+    },
+    {
+      "label": "Pure Peony",
+      "value": "Pure Peony",
+      "subMenu": {
+        "items": [
+          {
+            "label": "PP 3 pack healing body bar",
+            "value": "ppbar3",
+            "defaultPrice": 30
+          },
+          {
+            "label": "PP bulk 20ml High Factor Peony Root Skin remedy",
+            "value": "pphf20",
+            "defaultPrice": 15
+          },
+          {
+            "label": "PP bulk 80ml High Factor Peony Root Skin remedy",
+            "value": "pphf80",
+            "defaultPrice": 48
+          },
+          {
+            "label": "PP Lavender soap tin",
+            "value": "pplavsoap",
+            "defaultPrice": 10
+          },
+          {
+            "label": "PP 3 pack Shampoo bars",
+            "value": "ppshamp3",
+            "defaultPrice": 28
+          }
+        ]
+      }
+    },
+    {
+      "label": "ReThink",
+      "value": "ReThink",
+      "subMenu": {
+        "items": [
+          { "label": "nut mylk bags", "value": "rtnutbag", "defaultPrice": 18 },
+          { "label": "canvas bags", "value": "rfcanbag", "defaultPrice": 12 },
+          {
+            "label": "plain canvas bags",
+            "value": "rfcanbagplain",
+            "defaultPrice": 0
+          },
+          {
+            "label": "calico philosphy bags",
+            "value": "rtcanbagcalico",
+            "defaultPrice": 10.99
+          },
+          { "label": "bottle bags", "value": "rtbotbag", "defaultPrice": 13.95 }
+        ]
+      }
+    },
+    {
+      "label": "Safewaste",
+      "value": "Safewaste",
+      "subMenu": {
+        "items": [
+          {
+            "label": "Safewaste straps",
+            "value": "swstrap",
+            "defaultPrice": 9.5
+          }
+        ]
+      }
+    },
+    {
+      "label": "SJ Williams",
+      "value": "SJ Williams",
+      "subMenu": {
+        "items": [
+          {
+            "label": "Dishcloth - crotched",
+            "value": "sjwdishcloth",
+            "defaultPrice": 6
+          },
+          { "label": "Seeds", "value": "sjwseeds", "defaultPrice": 2.5 },
+          {
+            "label": "Stainless steel pegs",
+            "value": "sjwpegs",
+            "defaultPrice": 28
+          }
+        ]
+      }
+    },
+    {
+      "label": "WCRC - reused",
+      "value": "WCRC - reused",
+      "subMenu": {
+        "items": [
+          { "label": "Books", "value": "books", "defaultPrice": 1 },
+          { "label": "Puzzles", "value": "puzzles", "defaultPrice": 2 }
+        ]
+      }
+    },
+    {
+      "label": "Zing",
+      "value": "Zing",
+      "subMenu": {
+        "items": [
+          { "label": "bokashi Zing", "value": "zing", "defaultPrice": 5 }
+        ]
+      }
+    },
+    {
+      "label": "Zonta",
+      "value": "Zonta",
+      "subMenu": {
+        "items": [
+          { "label": "Coatlets", "value": "coatlet", "defaultPrice": 57.5 }
+        ]
+      }
+    }
+  ]
+}

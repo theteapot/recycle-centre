@@ -9,7 +9,7 @@ import {
 import Header from "../../components/header";
 import OrderBox from "./order-box";
 
-const SERVER = process.env.SERVER;
+const SERVER = process.env.REACT_APP_SERVER;
 
 export default class History extends Component {
   constructor(props) {
@@ -38,7 +38,7 @@ export default class History extends Component {
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
-            onRefresh={this.getOrders}
+            onRefresh={() => this.getOrders()}
           />
         }
       >
