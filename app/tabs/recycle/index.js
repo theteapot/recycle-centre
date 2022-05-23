@@ -38,6 +38,7 @@ export default class Recycle extends Component {
       { label: "BOKASHI", value: "BOKASHI" },
       { label: "FOODSCRAPS", value: "FOODSCRAPS" },
       { label: "CARDS", value: "CARDS" },
+      { label: "SOFT PLASTIC", value: "SOFT PLASTIC"}
     ];
 
     this.state = {
