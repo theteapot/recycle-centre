@@ -21,7 +21,7 @@ export default function () {
           ...this.props.style,
         }}
         onSubmitEditing={this.props.onSubmitEditing}
-        returnKeyType="Done"
+        returnKeyType="done"
         onChangeText={(value) => {
           this.props.onChangeText(value);
         }}
