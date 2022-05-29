@@ -6,10 +6,11 @@
   "scripts": {
     "start": "node index.js",
     "start-dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node_modules/.bin/_mocha",
     "deploy": "./build-docker.sh && ./deploy.sh",
     "docker-build": "sudo docker build ./ -t theteapot/recycle-centre-server:latest --no-cache",
-    "docker-push": "sudo docker push theteapot/recycle-centre-server:latest"
+    "docker-push": "sudo docker push theteapot/recycle-centre-server:latest",
+    "docker-test": ""
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +22,10 @@
     "moment": "^2.29.2",
     "moment-timezone": "^0.5.26",
     "mongodb": "^3.3.2",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "node-fetch": "^2"
+  },
+  "devDependencies": {
+    "mocha": "^10.0.0"
   }
 }
