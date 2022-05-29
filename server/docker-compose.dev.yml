@@ -1,0 +1,26 @@
+version: "3.3"
+
+services:
+  recycle_centre:
+    build:
+      context: .
+    ports:
+      - 8888:5142
+    environment:
+      - DB_NAME=recycle_centre
+      - PORT=5142
+      - TZ=Pacific/Auckland
+    volumes:
+      - ./:/app
+    command: npm test
+
+  mongo:
+    image: mongo:4.2.8
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+      - mongodb_config:/data/configdb
+volumes:
+  mongodb:
+  mongodb_config:
