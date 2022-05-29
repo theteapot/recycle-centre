@@ -9,7 +9,9 @@ import {
 import Header from "../../components/header";
 import OrderBox from "./order-box";
 
-const SERVER = process.env.REACT_APP_SERVER;
+import { SERVER } from "../../constants";
+
+// const SERVER = process.env.REACT_APP_SERVER;
 
 export default class History extends Component {
   constructor(props) {
@@ -25,6 +27,7 @@ export default class History extends Component {
 
   async getOrders(time) {
     let orders = await (await fetch(`${SERVER}/history`)).json();
+    orders = orders.reverse();
     this.setState({ orders });
   }
 
@@ -55,6 +58,7 @@ export default class History extends Component {
           <Header label="HISTORY" style={{ marginBottom: 10 }} />
           {this.state.orders.map(
             ({
+              _id,
               productType,
               paymentType,
               paymentAmount,
@@ -62,6 +66,7 @@ export default class History extends Component {
               timestamp,
             }) => (
               <OrderBox
+                key={_id}
                 productType={productType}
                 paymentAmount={paymentAmount}
                 paymentType={paymentType}
