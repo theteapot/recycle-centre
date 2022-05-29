@@ -1,13 +1,14 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
+    "start": "cross-env APP_ENV=DEV expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "build-android": "expo build:android",
-    "build-ios": "expo build:ios",
+    "build-android": "eas build --platform android",
+    "build-ios": "eas build --platform ios",
+    "build-all": "eas build --platform all",
     "publish": "expo publish"
   },
   "packagerOpts": {
@@ -26,6 +27,7 @@
     "babel-plugin-inline-dotenv": "^1.6.0",
     "dotenv": "^8.2.0",
     "expo": "^45.0.0",
+    "expo-constants": "^13.1.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-native": "0.68.2",
