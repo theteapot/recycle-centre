@@ -1,14 +1,5 @@
 import React, { Component } from "react";
-import ModalPicker from "react-native-modal-selector";
-import {
-  View,
-  Text,
-  StyleSheet,
-  KeyboardAvoidingView,
-  ScrollView,
-  Picker,
-  Modal,
-} from "react-native";
+import ModalSelector from "react-native-modal-selector";
 import PropTypes from "prop-types";
 import { colors } from "../../styles";
 import InputParent from "../input-parent";
@@ -17,7 +8,7 @@ export default class GenericPicker extends Component {
   render() {
     return (
       <InputParent label={this.props.label}>
-        <ModalPicker
+        <ModalSelector
           optionStyle={{
             backgroundColor: colors.primary,
           }}
@@ -37,7 +28,6 @@ export default class GenericPicker extends Component {
             color: "white",
           }}
           selectStyle={{ borderWidth: 0 }}
-          selectTextStyle={{ flexWrap: 1 }}
           selectedKey={this.props.selectedKey}
           style={{
             borderWidth: 0,
