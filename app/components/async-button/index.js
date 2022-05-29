@@ -1,19 +1,28 @@
 import React, { Component } from "react";
-import { View, Text, TouchableHighlight } from "react-native";
+import {
+  View,
+  Text,
+  TouchableHighlight,
+  ActivityIndicator,
+} from "react-native";
 import PropTypes from "prop-types";
 import { colors } from "../../styles";
 
 export default class AsyncButton extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { loading: false };
   }
 
   render() {
     return (
       <TouchableHighlight
         disabled={this.props.disabled}
-        onPress={this.props.onPress}
+        onPress={async () => {
+          this.setState({ loading: true });
+          await this.props.onPress();
+          this.setState({ loading: false });
+        }}
         underlayColor={colors.secondaryLight}
         style={{
           backgroundColor: this.props.disabled
@@ -37,7 +46,11 @@ export default class AsyncButton extends Component {
             ...this.props.textStyle,
           }}
         >
-          {this.props.label}
+          {this.state.loading ? (
+            <ActivityIndicator color={colors.secondaryText} size="large" />
+          ) : (
+            this.props.label
+          )}
         </Text>
       </TouchableHighlight>
     );
