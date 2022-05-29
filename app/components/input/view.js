@@ -20,7 +20,9 @@ export default function () {
           textAlign: "center",
           ...this.props.style,
         }}
-        onSubmitEditing={this.props.onSubmitEditing}
+        onSubmitEditing={({ nativeEvent: { text } }) =>
+          this.props.onSubmitEditing(text)
+        }
         returnKeyType="done"
         onChangeText={(value) => {
           this.props.onChangeText(value);

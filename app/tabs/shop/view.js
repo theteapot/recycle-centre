@@ -87,9 +87,7 @@ export default function () {
           value={this.state.paymentAmount}
           onChangeText={(value) => this.setState({ paymentAmount: value })}
           placeholder="Enter price per unit ($) *"
-          onSubmitEditing={(value) =>
-            this.setState({ paymentAmount: this.state.paymentAmount })
-          }
+          onSubmitEditing={(value) => this.setState({ paymentAmount: value })}
         />
 
         {/* Add item to order */}
