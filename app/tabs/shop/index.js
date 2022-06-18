@@ -12,22 +12,9 @@ import GenericPicker from "../../components/generic-picker";
 import { productTypes } from "./productsBySupplier.json";
 import view from "./view";
 
-export default class Recycle extends Component {
+export default class Shop extends Component {
   constructor(props) {
     super(props);
-
-    // Apply numeric keys to items for picker elements to use
-    this.productTypes = productTypes.map((product, key) => {
-      return {
-        ...product,
-        key,
-        subMenu: {
-          items: product.subMenu.items.map((subProduct, key) => {
-            return { ...subProduct, key };
-          }),
-        },
-      };
-    });
 
     this.state = {
       paymentType: "cash",
@@ -40,6 +27,7 @@ export default class Recycle extends Component {
       loading: false,
       statusText: "",
       order: [],
+      productTypes: [],
     };
 
     this.addToOrder = this.addToOrder.bind(this);
@@ -49,6 +37,25 @@ export default class Recycle extends Component {
     this.setSelectedSubValue = this.setSelectedSubValue.bind(this);
     this.showDialog = this.showDialog.bind(this);
     this.renderSubPicker = this.renderSubPicker.bind(this);
+  }
+
+  async componentDidMount() {
+    let { productTypes } = await (
+      await fetch(`${SERVER}/products/shop`)
+    ).json();
+    // Apply numeric keys to items for picker elements to use
+    productTypes = productTypes.map((product, key) => {
+      return {
+        ...product,
+        key,
+        subMenu: {
+          items: product.subMenu.items.map((subProduct, key) => {
+            return { ...subProduct, key };
+          }),
+        },
+      };
+    });
+    this.setState({ productTypes });
   }
 
   setSelectedValue(value) {
@@ -107,11 +114,11 @@ export default class Recycle extends Component {
 
     let product;
     if (selectedSubProduct === "") {
-      product = this.productTypes.find(
+      product = this.state.productTypes.find(
         ({ value }) => value === selectedProduct
       );
     } else {
-      product = this.productTypes
+      product = this.state.productTypes
         .find(({ value }) => value === selectedProduct)
         .subMenu.items.find(({ value }) => value === selectedSubProduct);
     }
@@ -141,7 +148,7 @@ export default class Recycle extends Component {
 
   renderSubPicker() {
     let { selectedProduct } = this.state;
-    let selectedProductType = this.productTypes.find(
+    let selectedProductType = this.state.productTypes.find(
       ({ value }) => value == selectedProduct
     );
     if (selectedProduct === "" || !selectedProductType) {
@@ -154,6 +161,7 @@ export default class Recycle extends Component {
   }
 
   render() {
+    console.log(this.state.productTypes);
     return view.apply(this);
   }
 }

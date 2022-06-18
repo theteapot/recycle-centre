@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  KeyboardAvoidingView,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import Button from "../../components/buttons";
 import Input from "../../components/input";
 import TextInput from "../../components/text-input";
@@ -41,12 +47,16 @@ export default function () {
           }}
         />
 
-        <GenericPicker
-          data={this.state.productTypeButtons}
-          label="RECYCLING"
-          initValue="Pick recycling product"
-          onChange={(value) => this.setSelectedValue(value)}
-        />
+        {this.state.productTypeButtons.length == 0 ? (
+          <ActivityIndicator color={colors.secondaryText} size="large" />
+        ) : (
+          <GenericPicker
+            data={this.state.productTypeButtons}
+            label="RECYCLING"
+            initValue="Pick recycling product"
+            onChange={(value) => this.setSelectedValue(value)}
+          />
+        )}
 
         <TextInput
           label="COMMENT"

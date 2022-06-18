@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, ActivityIndicator } from "react-native";
 import Input from "../../components/input";
 import AsyncButton from "../../components/async-button";
 // const SERVER = process.env.REACT_APP_SERVER;
@@ -26,19 +26,25 @@ export default function () {
       >
         <Header label="SHOP" />
         {/* Product Picker */}
-        <GenericPicker
-          data={this.productTypes}
-          initValue="Select a product type"
-          onChange={(value) => this.setSelectedValue(value)}
-          selectedKey={this.state.selectedKey}
-          label={"PRODUCT"}
-        />
+        {this.state.productTypes.length == 0 ? (
+          <ActivityIndicator color={colors.secondaryText} size="large" />
+        ) : (
+          <GenericPicker
+            data={this.state.productTypes}
+            initValue="Select a product type"
+            onChange={(value) => this.setSelectedValue(value)}
+            selectedKey={this.state.selectedKey}
+            label={"PRODUCT"}
+          />
+        )}
         {/* Picker for sub items */}
         {this.state.selectedProduct !== "" &&
-          this.productTypes[this.state.selectedKey].subMenu.items.length >
+          this.state.productTypes[this.state.selectedKey].subMenu.items.length >
             0 && (
             <GenericPicker
-              data={this.productTypes[this.state.selectedKey].subMenu.items}
+              data={
+                this.state.productTypes[this.state.selectedKey].subMenu.items
+              }
               onChange={
                 (value, index) => this.setSelectedSubValue(value, index)
                 // this.setSelectedValue(value, index)

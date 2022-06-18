@@ -1,0 +1,52 @@
+{
+    "recycleProducts": [
+        {
+            "label": "CARDBOARD",
+            "value": "CARDBOARD"
+        },
+        {
+            "label": "POLY",
+            "value": "POLY"
+        },
+        {
+            "label": "E-WASTE",
+            "value": "E-WASTE"
+        },
+        {
+            "label": "BATTERIES",
+            "value": "BATTERIES"
+        },
+        {
+            "label": "FOAM",
+            "value": "FOAM"
+        },
+        {
+            "label": "PLASTIC FILM",
+            "value": "PLASTIC FILM"
+        },
+        {
+            "label": "PLASTIC MIXED",
+            "value": "PLASTIC MIXED"
+        },
+        {
+            "label": "BIOCHAR",
+            "value": "BIOCHAR"
+        },
+        {
+            "label": "BOKASHI",
+            "value": "BOKASHI"
+        },
+        {
+            "label": "FOODSCRAPS",
+            "value": "FOODSCRAPS"
+        },
+        {
+            "label": "CARDS",
+            "value": "CARDS"
+        },
+        {
+            "label": "SOFT PLASTIC",
+            "value": "SOFT PLASTIC"
+        }
+    ]
+}
