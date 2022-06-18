@@ -1,7 +1,7 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "cross-env APP_ENV=DEV expo start",
+    "start": "cross-env APP_ENV=DEV expo start --lan",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
@@ -29,6 +29,7 @@
     "expo": "^45.0.0",
     "expo-constants": "^13.1.1",
     "react": "17.0.2",
+    "react-devtools": "^4.24.7",
     "react-dom": "17.0.2",
     "react-native": "0.68.2",
     "react-native-dialog-component": "^0.2.17",
