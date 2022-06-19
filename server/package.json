@@ -26,6 +26,7 @@
     "node-fetch": "^2"
   },
   "devDependencies": {
+    "csv-parse": "^5.2.0",
     "mocha": "^10.0.0"
   }
 }
