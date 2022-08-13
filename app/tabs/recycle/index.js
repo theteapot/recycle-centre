@@ -9,8 +9,8 @@ export default class Recycle extends Component {
     super(props);
 
     this.paymentTypeButtons = [
-      { label: "CASH", value: "cash", pressed: true },
-      { label: "EFTPOS", value: "EFTPOS", pressed: false },
+      { label: "CASH", value: "cash"},
+      { label: "EFTPOS", value: "EFTPOS"},
     ];
 
     let index = 0;

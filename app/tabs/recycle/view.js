@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
-import Button from "../../components/buttons";
+import Buttons from "../../components/buttons";
 import Input from "../../components/input";
 import TextInput from "../../components/text-input";
 import AsyncButton from "../../components/async-button";
@@ -24,9 +24,11 @@ export default function () {
       >
         <Header label={`RECYCLING`} />
         <Text>{SERVER}</Text>
+        <Text>{JSON.stringify(this.state)}</Text>
 
-        <Button
+        <Buttons
           style={{ zIndex: 1 }}
+          value={this.state.paymentType}
           direction="horizontal"
           buttons={this.state.paymentTypeButtons}
           onChange={(index) => {

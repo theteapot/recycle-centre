@@ -3,17 +3,17 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import { colors } from "../../styles";
 
-function renderButtons(buttons, direction, onPress, style, buttonIsSelected) {
+function renderButtons(buttons, direction, onPress, style, buttonIsSelected, selectedValue) {
   return buttons.map(
-    ({ label, value, pressed }, index) =>
-      ((buttonIsSelected && pressed) || !buttonIsSelected) && (
-        <TouchableOpacity
+    ({ label, value }, index) =>
+      {
+        let pressed = value == selectedValue;
+        return (<TouchableOpacity
           activeOpacity={0.5}
           key={index}
           style={{
             ...style,
             flexGrow: direction === "horizontal" ? 1 : 0,
-            // height: 50,
             justifyContent: "center",
             borderTopLeftRadius: index === 0 ? 20 : 0,
             borderBottomLeftRadius:
@@ -27,16 +27,8 @@ function renderButtons(buttons, direction, onPress, style, buttonIsSelected) {
                 ? 20
                 : 0,
             borderBottomRightRadius: index === buttons.length - 1 ? 20 : 0,
-
-            // borderRightWidth:
-            //   index !== buttons.length - 1 && direction === "horizontal"
-            //     ? 1
-            //     : 0,
-            // borderBottomWidth:
-            //   index !== buttons.length - 1 && direction === "vertical" ? 1 : 0,
             borderWidth: 1,
             borderColor: colors.primary,
-
             backgroundColor: pressed ? colors.primary : colors.background,
           }}
           onPressOut={() => onPress(index)}
@@ -51,8 +43,8 @@ function renderButtons(buttons, direction, onPress, style, buttonIsSelected) {
           >
             {label}
           </Text>
-        </TouchableOpacity>
-      )
+        </TouchableOpacity>)
+      }     
   );
 }
 
@@ -71,7 +63,8 @@ export default function () {
         this.props.direction,
         this._pressButton,
         this.props.style,
-        this.state.buttonIsSelected
+        this.state.buttonIsSelected,
+        this.props.value
       )}
     </View>
   );

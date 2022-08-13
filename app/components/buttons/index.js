@@ -12,13 +12,6 @@ export default class Button extends Component {
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.buttons.find(({ pressed }) => pressed) && !this.props.buttons.find(({ pressed }) => pressed)) {
-      this.setState({ buttonIsSelected: false })
-    } else if (!prevProps.buttons.find(({ pressed }) => pressed) && this.props.buttons.find(({ pressed }) => pressed)) {
-      this.setState({ buttonIsSelected: true })
-    }
-  }
 
   _pressButton(index) {
     this.props.onChange(index);
