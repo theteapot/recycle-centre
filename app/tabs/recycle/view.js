@@ -23,6 +23,8 @@ export default function () {
         }}
       >
         <Header label={`RECYCLING`} />
+        <Text>{SERVER}</Text>
+
         <Button
           style={{ zIndex: 1 }}
           direction="horizontal"
