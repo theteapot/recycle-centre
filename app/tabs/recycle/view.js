@@ -23,8 +23,6 @@ export default function () {
         }}
       >
         <Header label={`RECYCLING`} />
-        <Text>{SERVER}</Text>
-        <Text>{JSON.stringify(this.state)}</Text>
 
         <Buttons
           style={{ zIndex: 1 }}
