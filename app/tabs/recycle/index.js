@@ -27,6 +27,8 @@ export default class Recycle extends Component {
       { key: index++, label: "FOODSCRAPS", value: "FOODSCRAPS" },
       { key: index++, label: "CARDS", value: "CARDS" },
       { key: index++, label: "SOFT PLASTIC", value: "SOFT PLASTIC" },
+      { key: index++, label: "HARD PLASTIC", value: "HARD PLASTIC" },
+      { key: index++, label: "LIGHTBULBS", value: "LIGHTBULBS" },
     ];
 
     this.state = {

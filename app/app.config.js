@@ -5,7 +5,7 @@ export default ({ config }) => {
     config = {
       ...config,
       extra: {
-        SERVER: "http://192.168.88.250:8888",
+        SERVER: "http://192.168.11.101:5142",
       },
     };
   } else {
